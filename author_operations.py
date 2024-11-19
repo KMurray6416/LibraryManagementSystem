@@ -1,7 +1,9 @@
+from validation import Validate
 
 class Author:
     def __init__(self, name, biography):
-        self.__name = name
+        self.validator = Validate()  # Create an instance of the validation class
+        self.__name = self.validator.validate_name(name)
         self.__biography = biography
 
     # Getter for name
@@ -10,7 +12,10 @@ class Author:
 
     # Setter for name
     def set_name(self, name):
-        self.__name = name
+        try:
+            self.__name = self.validator.validate_name(name)
+        except ValueError as e:
+            print(f"Error setting name: {e}")
 
     # Getter for biography
     def get_biography(self):
