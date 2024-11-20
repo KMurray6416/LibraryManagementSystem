@@ -20,7 +20,9 @@ class Book:
 
     # Setter for title
     def set_title(self, title):
+       
         try:
+            
             validated_title = self.validator.validate_title(title)
             if validated_title:
                 self.__title = title

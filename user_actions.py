@@ -6,13 +6,6 @@ class UserInterface:
     def __init__(self):
         self.library = Library()
 
-    def get_valid_input(self, prompt, validation_func, error_message):
-        """Prompt user and validate input using a validation function."""
-        while True:
-            user_input = input(prompt)
-            if validation_func(user_input):
-                return user_input
-            print(error_message)
 
     def display_main_menu(self):
         print("\nWelcome to the Library Management System!")
@@ -58,24 +51,14 @@ class UserInterface:
 
                 choice = int(choice)
                 if choice == 1:
-                    title = self.get_valid_input(
-                        "Enter book title: ", valid.validate_title, "Invalid title format."
-                    )
-                    author = self.get_valid_input(
-                        "Enter author: ", valid.validate_name, "Invalid name format."
-                    )
+                    title = input("Please enter the book title: ")
+                    author = input(" Please enter the author: ")
                     genre = input("Enter genre: ")  # Assuming free input for genre
                     pub_date = input("Enter publication date (e.g., YYYY): ")  # Add further validation if needed
                     self.library.add_book(title, author, genre, pub_date)
                 elif choice == 2:
-                    library_id = self.get_valid_input(
-                        "Enter your library ID (e.g., AB-12345): ",
-                        valid.validate_id,
-                        "Invalid library ID format.",
-                    )
-                    title = self.get_valid_input(
-                        "Enter the book title: ", valid.validate_title, "Invalid title format."
-                    )
+                    library_id = input(" Please enter library ID: ")
+                    title = input("Please enter the book title: ")
                     user = self.library.find_user(library_id)
                     book = self.library.find_book(title)
                     if user and book:
@@ -87,14 +70,8 @@ class UserInterface:
                     else:
                         print("User or Book not found.")
                 elif choice == 3:
-                    library_id = self.get_valid_input(
-                        "Enter your library ID (e.g., AB-12345): ",
-                        valid.validate_id,
-                        "Invalid library ID format.",
-                    )
-                    title = self.get_valid_input(
-                        "Enter the book title: ", valid.validate_title, "Invalid title format."
-                    )
+                    library_id = input(" Please enter library ID:")
+                    title = input("Please enter the book title: ")
                     user = self.library.find_user(library_id)
                     book = self.library.find_book(title)
                     if user and book:
@@ -106,9 +83,7 @@ class UserInterface:
                     else:
                         print("User or Book not found.")
                 elif choice == 4:
-                    title = self.get_valid_input(
-                        "Enter the book title to search: ", valid.validate_title, "Invalid title format."
-                    )
+                    title = input("Please enter the book title: ")
                     book = self.library.find_book(title)
                     if book:
                         print(book.display_info())
@@ -142,25 +117,15 @@ class UserInterface:
 
                 choice = int(choice)
                 if choice == 1:
-                    name = self.get_valid_input(
-                        "Enter user's name: ", valid.validate_name, "Invalid name format."
-                    )
-                    library_id = self.get_valid_input(
-                        "Enter library ID (e.g., AB-12345): ",
-                        valid.validate_id,
-                        "Invalid library ID format.",
-                    )
+                    name = input("Enter your name: ")
+                    library_id =input("Enter library ID: ")
                     if self.library.find_user(library_id):
                         print("A user with this ID already exists.")
                     else:
                         self.library.add_user(name, library_id)
                         print(f"User '{name}' added successfully.")
                 elif choice == 2:
-                    library_id = self.get_valid_input(
-                        "Enter the library ID of the user: ",
-                        valid.validate_id,
-                        "Invalid library ID format.",
-                    )
+                    library_id =input("Enter library ID: ")
                     user = self.library.find_user(library_id)
                     if user:
                         print(user.display_info())
@@ -194,9 +159,7 @@ class UserInterface:
 
                 choice = int(choice)
                 if choice == 1:
-                    name = self.get_valid_input(
-                        "Enter author's name: ", valid.validate_name, "Invalid name format."
-                    )
+                    name = input("Enter the author's name: ")
                     biography = input("Enter biography: ")  
                     if self.library.find_author(name):
                         print("An author with this name already exists.")
@@ -204,9 +167,7 @@ class UserInterface:
                         self.library.add_author(name, biography)
                         print(f"Author '{name}' added successfully.")
                 elif choice == 2:
-                    name = self.get_valid_input(
-                        "Enter the author's name: ", valid.validate_name, "Invalid name format."
-                    )
+                    name = input("Enter the author's name: ")
                     author = self.library.find_author(name)
                     if author:
                         print(author.display_info())
@@ -224,4 +185,4 @@ class UserInterface:
             except Exception as e:
                 print(f"An error occurred: {e}")
 
-    
+

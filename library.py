@@ -10,6 +10,7 @@ class Library:
 
     def add_book(self, title, author, genre, publication_date):
         new_book = Book(title, author, genre, publication_date)
+        
         self.books[title] = new_book
         if author in self.authors:
             self.authors[author].add_book(title)
