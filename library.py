@@ -44,3 +44,4 @@ class Library:
 
     def list_authors(self):
         return [author.display_info() for author in self.authors.values()]
+

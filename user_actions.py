@@ -1,11 +1,11 @@
 from library import Library
 from validation import Validate 
+
 valid = Validate
 
 class UserInterface:
     def __init__(self):
         self.library = Library()
-
 
     def display_main_menu(self):
         print("\nWelcome to the Library Management System!")
@@ -16,7 +16,9 @@ class UserInterface:
                 print("2. User Operations")
                 print("3. Author Operations")
                 print("4. Quit")
+
                 choice = input("Choose an option: ")
+                
                 if not choice.isdigit() or int(choice) not in range(1, 5):
                     print("Invalid choice. Please enter a number between 1 and 4.")
                     continue
@@ -44,12 +46,15 @@ class UserInterface:
                 print("4. Search for a book")
                 print("5. Display all books")
                 print("6. Back to main menu")
+
                 choice = input("Choose an option: ")
+
                 if not choice.isdigit() or int(choice) not in range(1, 7):
                     print("Invalid choice. Please enter a number between 1 and 6.")
                     continue
 
                 choice = int(choice)
+
                 if choice == 1:
                     title = input("Please enter the book title: ")
                     author = input(" Please enter the author: ")
@@ -109,6 +114,7 @@ class UserInterface:
                 print("2. View user details")
                 print("3. Display all users")
                 print("4. Back to main menu")
+
                 choice = input("Choose an option: ")
 
                 if not choice.isdigit() or int(choice) not in range(1, 5):
@@ -151,6 +157,7 @@ class UserInterface:
                 print("2. View author details")
                 print("3. Display all authors")
                 print("4. Back to main menu")
+                
                 choice = input("Choose an option: ")
 
                 if not choice.isdigit() or int(choice) not in range(1, 5):
