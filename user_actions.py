@@ -1,5 +1,7 @@
 from library import Library
 from validation import Validate 
+import library_database_connect as ldc
+
 
 valid = Validate
 
@@ -59,8 +61,9 @@ class UserInterface:
                     title = input("Please enter the book title: ")
                     author = input(" Please enter the author: ")
                     genre = input("Enter genre: ")  # Assuming free input for genre
-                    pub_date = input("Enter publication date (e.g., YYYY): ")  # Add further validation if needed
-                    self.library.add_book(title, author, genre, pub_date)
+                    publication_date = input("Enter publication date (e.g., MM-DD-YYYY): ")  
+                    self.library.add_book(title, author, genre, publication_date)
+                    ldc.add_book_to_db(title, author, genre, publication_date)
                 elif choice == 2:
                     library_id = input(" Please enter library ID: ")
                     title = input("Please enter the book title: ")
@@ -191,5 +194,10 @@ class UserInterface:
                     break
             except Exception as e:
                 print(f"An error occurred: {e}")
+
+
+
+
+
 
 
