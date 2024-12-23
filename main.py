@@ -1,9 +1,9 @@
 from user_actions import UserInterface
 import library_database_connect
 
-ldc =library_database_connect
-ldc.connect_database()
-ldc.create_tables()
+ldc = library_database_connect
+ldc.Database.connect_database()
+ldc.Database.create_tables()
 
 
 

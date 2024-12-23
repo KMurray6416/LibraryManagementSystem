@@ -72,6 +72,7 @@ class UserInterface:
                     if user and book:
                         if book.borrow_book():
                             user.borrow_book(title)
+                            ldc.borrow_book(library_id, title)
                             print("Book borrowed successfully.")
                         else:
                             print("Book is not available.")
@@ -85,6 +86,7 @@ class UserInterface:
                     if user and book:
                         if user.return_book(title):
                             book.return_book()
+                            ldc.return_borrowed_book()
                             print("Book returned successfully.")
                         else:
                             print("This user did not borrow the book.")
