@@ -39,6 +39,7 @@ class UserInterface:
                 print(f"An unexpected error occurred: {e}")
 
     def book_ops_menu(self):
+        from books_librarian_db import Books
         while True:
             try:
                 print("\nBook Operations:")
@@ -63,7 +64,7 @@ class UserInterface:
                     genre = input("Enter genre: ")  # Assuming free input for genre
                     publication_date = input("Enter publication date (e.g., MM-DD-YYYY): ")  
                     self.library.add_book(title, author, genre, publication_date)
-                    ldc.add_book_to_db(title, author, genre, publication_date)
+                    Books.add_book_to_db(title, author, genre, publication_date)
                 elif choice == 2:
                     library_id = input(" Please enter library ID: ")
                     title = input("Please enter the book title: ")
@@ -72,7 +73,7 @@ class UserInterface:
                     if user and book:
                         if book.borrow_book():
                             user.borrow_book(title)
-                            ldc.borrow_book(library_id, title)
+                            Books.borrow_book(library_id, title)
                             print("Book borrowed successfully.")
                         else:
                             print("Book is not available.")
@@ -86,7 +87,7 @@ class UserInterface:
                     if user and book:
                         if user.return_book(title):
                             book.return_book()
-                            ldc.return_borrowed_book()
+                            Books.return_borrowed_book()
                             print("Book returned successfully.")
                         else:
                             print("This user did not borrow the book.")
@@ -95,12 +96,14 @@ class UserInterface:
                 elif choice == 4:
                     title = input("Please enter the book title: ")
                     book = self.library.find_book(title)
+                    Books.lookup_book()
                     if book:
-                        print(book.display_info())
+                        print(book.display_info())   
                     else:
                         print("Book not found.")
                 elif choice == 5:
                     books = self.library.list_books()
+                    Books.list_books
                     if books:
                         for book in books:
                             print(book)
@@ -112,6 +115,7 @@ class UserInterface:
                 print(f"An error occurred: {e}")
 
     def user_ops_menu(self):
+        import users_librarian_db as ul_db
         while True:
             try:
                 print("\nUser Operations:")
@@ -134,16 +138,19 @@ class UserInterface:
                         print("A user with this ID already exists.")
                     else:
                         self.library.add_user(name, library_id)
+                        ul_db.db_add_user(name, library_id)
                         print(f"User '{name}' added successfully.")
                 elif choice == 2:
                     library_id =input("Enter library ID: ")
                     user = self.library.find_user(library_id)
+                    ul_db.view_user_details(library_id)
                     if user:
                         print(user.display_info())
                     else:
                         print("User not found.")
                 elif choice == 3:
                     users = self.library.list_users()
+                    ul_db.display_users()
                     if users:
                         for user_info in users:
                             print(user_info)
